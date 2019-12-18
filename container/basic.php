@@ -31,11 +31,11 @@ use League\Container\Container;
 
 $container = new Container;
 
-$container->add('service', Service::class);
-$container->add('client', Client::class)->addArgument($container->get('service'));
+$container->add(Service::class);
+$container->add('client_alias', Client::class)->addArgument(Service::class);
 
-$client1 = $container->get('client');
-$client2 = $container->get('client');
+$client1 = $container->get('client_alias');
+$client2 = $container->get('client_alias');
 
 var_dump($client1 instanceof Client); // true
 var_dump($client1->service instanceof Service); // true
